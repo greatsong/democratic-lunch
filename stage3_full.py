@@ -305,8 +305,14 @@ def rows_to_df(rows) -> pd.DataFrame:
         df[c] = df[c].astype(str)
     df["메뉴"] = df["메뉴"].str.strip()
     df["팀원"] = df["팀원"].str.strip()
-    # 시각은 이미 KST 문자열 → 그대로 파싱, UTC 재변환 금지
+    # 시각은 원칙적으로 KST 문자열. 다만 시트가 문자열을 날짜 셀로 자동 변환하면
+    # UTC ISO(…T…Z)로 실려 오므로, 그 경우엔 KST로 되돌려 읽는다.
     df["dt"] = pd.to_datetime(df["시각"], format=TIME_FMT, errors="coerce")
+    iso_mask = df["dt"].isna()
+    if iso_mask.any():
+        iso = pd.to_datetime(df.loc[iso_mask, "시각"], errors="coerce", utc=True)
+        df.loc[iso_mask, "dt"] = iso.dt.tz_convert("Asia/Seoul").dt.tz_localize(None)
+    df = df[df["dt"].notna()].copy()   # 끝내 못 읽은 행은 버림 (전부 NaT → 빈 비교 크래시 예방)
     return df
 
 
