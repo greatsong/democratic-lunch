@@ -1,0 +1,9 @@
+# 민주적 점심 v2 — 식욕 팔레트
+# 다크 모드 브라우저에서도 크림 배경 위 글자가 묻히지 않게 라이트 테마로 고정
+[theme]
+base = "light"
+primaryColor = "#FF5A36"          # 코랄/토마토 (주역)
+backgroundColor = "#FFF9F2"       # 크림 배경
+secondaryBackgroundColor = "#FFE8DD"  # 라이트살몬 (카드/위젯)
+textColor = "#2B1D16"             # 딥브라운 본문
+font = "sans serif"

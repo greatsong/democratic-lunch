@@ -5,5 +5,6 @@ import streamlit as st
 pg = st.navigation([
     st.Page("stage1_basic.py", title="1단계 · 기본판 (① 프롬프트)", default=True),
     st.Page("stage2_improved.py", title="2단계 · 개선판 (③ 개선)"),
+    st.Page("stage3_full.py", title="3단계 · 풀버전 (완성형)"),
 ])
 pg.run()

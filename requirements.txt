@@ -1,2 +1,4 @@
 requests
 plotly
+tzdata
+streamlit-js-eval
